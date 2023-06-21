@@ -10,7 +10,7 @@ pipeline {
       }
     }
 
-    stage('Unit Tests - JUnit and Jacoco') {
+    stage('Unit Tests - JUnit and JaCoCo') {
       steps {
         sh "mvn test"
       }
@@ -24,13 +24,17 @@ pipeline {
           sh 'docker push mahendra770/numeric-app:""$GIT_COMMIT""'
         }
       }
-      stage('Kubernetes Deployment - DEV') {
+    }
+
+    stage('Kubernetes Deployment - DEV') {
       steps {
         withKubeConfig([credentialsId: 'kuneconfig']) {
-          sh "sed -i 's#replace#mhendra770/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+          sh "sed -i 's#replace#mahendra770/numeric-app:${GIT_COMMIT}#g' 
           sh "kubectl apply -f k8s_deployment_service.yaml"
         }
       }
     }
+    
   }
+
 }
