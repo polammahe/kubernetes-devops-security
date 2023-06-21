@@ -1,21 +1,17 @@
 pipeline {
   agent any
-
   stages {
-
     stage('Build Artifact - Maven') {
       steps {
         sh "mvn clean package -DskipTests=true"
         archive 'target/*.jar'
       }
     }
-
     stage('Unit Tests - JUnit and JaCoCo') {
       steps {
         sh "mvn test"
       }
     }
-
     stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
@@ -25,7 +21,6 @@ pipeline {
         }
       }
     }
-
     stage('Kubernetes Deployment - DEV') {
       steps {
         withKubeConfig([credentialsId: 'kuneconfig']) {
@@ -33,8 +28,6 @@ pipeline {
           sh "kubectl apply -f k8s_deployment_service.yaml"
         }
       }
-    }
-    
+    }  
   }
-
 }
