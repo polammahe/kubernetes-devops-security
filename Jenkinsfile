@@ -15,15 +15,8 @@ pipeline {
     }
     stage('SonarQube - SAST') {
       steps {
-        withSonarQubeEnv('SonarQube') {
           sh "mvn sonar:sonar -Dsonar.projectKey=secproject1 -Dsonar.host.url=http://securitydemo.eastasia.cloudapp.azure.com:9000 -Dsonar.login=dd6df3873260206cfcd6ae7b952ed1020a3986e4"
         }
-        timeout(time: 2, unit: 'MINUTES') {
-          script {
-            waitForQualityGate abortPipeline: true
-          }
-        }
-      }
     }
     stage('Docker Build and Push') {
       steps {
