@@ -1,27 +1,17 @@
 pipeline {
   agent any
-
   stages {
-
     stage('Build Artifact - Maven') {
       steps {
         sh "mvn clean package -DskipTests=true"
         archive 'target/*.jar'
       }
     }
-
     stage('Unit Tests - JUnit and JaCoCo') {
       steps {
         sh "mvn test"
       }
     }
-
-    stage('SonarQube - SAST') {
-      steps {
-        mvn sonar:sonar -Dsonar.projectKey=secproject -Dsonar.host.url=http://securitydemo.eastasia.cloudapp.azure.com:9000 -Dsonar.login=c915060e07263fc9e010bca089436f1ea2e92bec
-      }
-    }
-
     stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
@@ -31,7 +21,6 @@ pipeline {
         }
       }
     }
-
     stage('Kubernetes Deployment - DEV') {
       steps {
         withKubeConfig([credentialsId: 'kuneconfig']) {
@@ -40,7 +29,5 @@ pipeline {
         }
       }
     }
-
   }
-
 }
