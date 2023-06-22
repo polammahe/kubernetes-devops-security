@@ -7,14 +7,15 @@ pipeline {
         archive 'target/*.jar'
       }
     }
-    stage ("sonarqube-sast") {
-      steps{
-        sh "mvn sonar:sonar -Dsonar.projectKey=secproject -Dsonar.host.url=http://securitydemo.eastasia.cloudapp.azure.com:9000 -Dsonar.login=c915060e07263fc9e010bca089436f1ea2e92bec"
-      }
-    }
+    
     stage('Unit Tests - JUnit and JaCoCo') {
       steps {
         sh "mvn test"
+      }
+    }
+    stage ("sonarqube-sast") {
+      steps{
+        sh "mvn sonar:sonar -Dsonar.projectKey=secproject -Dsonar.host.url=http://securitydemo.eastasia.cloudapp.azure.com:9000 -Dsonar.login=c915060e07263fc9e010bca089436f1ea2e92bec"
       }
     }
     stage('Docker Build and Push') {
