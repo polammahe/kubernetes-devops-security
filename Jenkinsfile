@@ -30,7 +30,7 @@ pipeline {
     }
     stage('trivy-scan'){
       steps{
-        sh "trivy-docker-image-scan.sh"
+        sh "./trivy-docker-image-scan.sh"
       }
     }
     stage('Docker Build and Push') {
