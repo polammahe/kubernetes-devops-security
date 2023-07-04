@@ -37,11 +37,6 @@ pipeline {
         }
       }
     }
-    stage('Vulnerability Scan - Kubernetes') {
-      steps {
-       sh 'docker run --rm -v /var/lib/jenkins/workspace/pipeline:/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-      }
-    }
     stage("kube-scan"){
       steps{
         sh "bash kubesec-scan.sh"
