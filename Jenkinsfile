@@ -42,7 +42,7 @@ pipeline {
         sh "bash kubesec-scan.sh"
       }
     }
-    stage('Kubernetes Deployment - DEV') {
+    stage('Kubernete Deployment - DEV') {
       steps {
         withKubeConfig([credentialsId: 'kube-config']) {
           sh "sed -i 's#replace#mahendra770/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
