@@ -15,7 +15,7 @@ pipeline {
     }
     stage('SonarQube - SAST') {
       steps {
-          sh "mvn sonar:sonar -Dsonar.projectKey=demoapp1 -Dsonar.host.url=http://innominds.eastasia.cloudapp.azure.com:9000 -Dsonar.login=3a86e02b3668309fc007b149869a5666de0aa02a
+          sh "mvn sonar:sonar -Dsonar.projectKey=demoapp1 -Dsonar.host.url=http://innominds.eastasia.cloudapp.azure.com:9000 -Dsonar.login=3a86e02b3668309fc007b149869a5666de0aa02a"
       }
     }
     stage('Vulnerability Scan - Docker ') {
