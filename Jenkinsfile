@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Vulnerability Scan - Docker ') {
       steps {
-        sh "mvn dependency-check:check"
+        sh "sudo mvn dependency-check:check"
       }
       post {
         always {
