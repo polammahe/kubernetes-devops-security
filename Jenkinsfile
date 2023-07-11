@@ -10,7 +10,7 @@ pipeline {
     
     stage('Unit Test - JUnit and JaCoCo') {
       steps {
-        sh "mvn test"
+        sh "sudo mvn test"
       }
     }
     stage('SonarQube - SAST') {
