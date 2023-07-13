@@ -50,5 +50,10 @@ pipeline {
         }
       }
     }
+    stage('Email notification'){
+      steps{
+        mail bcc: '', body: 'jenkins job ,email alert', cc: '', from: '', replyTo: '', subject: 'jenkins job', to: 'polammahendra@gmail.com'
+      }
+    }
   }
 }
