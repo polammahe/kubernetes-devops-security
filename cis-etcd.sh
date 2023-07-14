@@ -10,4 +10,5 @@ if [[ "$total_fail" -ne 0 ]];
                 echo "CIS Benchmark Failed ETCD while testing for 2.2"
                 exit 1;
         else
-                echo "CIS Benchmark Passed for ETC
+                echo "CIS Benchmark Passed for ETCD - 2.2"
+fi;
