@@ -50,6 +50,25 @@ pipeline {
         }
       }
     }
+    stage('K8S CIS Benchmark') {
+      steps {
+        script {
+
+          parallel(
+            "Master": {
+              sh "bash cis-master.sh"
+            },
+            "Etcd": {
+              sh "bash cis-etcd.sh"
+            },
+            "Kubelet": {
+              sh "bash cis-kubelet.sh"
+            }
+          )
+
+        }
+      }
+    }
     stage('Email notification'){
       steps{
         mail bcc: '', body: 'jenkins job ,email alert', cc: '', from: '', replyTo: '', subject: 'jenkins job', to: 'polammahendra@gmail.com'
