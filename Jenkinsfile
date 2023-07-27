@@ -21,7 +21,7 @@ pipeline {
     }
     stage('SonarQube - SAST') {
       steps {
-          sh "sudo mvn sonar:sonar -Dsonar.projectKey=demoprjt -Dsonar.host.url=http://192.168.223.20:9000 -Dsonar.login=29d0583597f0f60e8d91f7f56d49019955b5fc3d"
+          sh "sudo  mvn sonar:sonar -Dsonar.projectKey=secproject  -Dsonar.host.url=http://192.168.223.20:9000 -Dsonar.login=8432c679e41df19591c8c8fb00a933fc93013e42"
       }
     }
     stage('Vulnerability Scan - Docker ') {
