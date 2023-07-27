@@ -19,7 +19,7 @@ pipeline {
         }
       }
     }
-    stage('SonarQube - SAST') {
+    stage('SonarQube - SAS') {
       steps {
           sh "sudo  mvn sonar:sonar -Dsonar.projectKey=secproject  -Dsonar.host.url=http://192.168.223.20:9000 -Dsonar.login=8432c679e41df19591c8c8fb00a933fc93013e42"
       }
