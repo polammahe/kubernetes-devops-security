@@ -75,6 +75,13 @@ pipeline {
         }
       }
     }
+     stage('OWASP ZAP - DAST') {
+      steps {
+        withKubeConfig([credentialsId: 'kubeconfig']) {
+          sh 'bash zap.sh'
+        }
+      }
+    }
     stage('Email notification'){
       steps{
         mail bcc: '', body: 'jenkins job ,email alert', cc: '', from: '', replyTo: '', subject: 'jenkins job', to: 'polammahendra@gmail.com'
